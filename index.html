@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page protégée</title>
+    <style>
+        /* Mise en page générale */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('imagemontenvers.jpg');no-repeat center center fixed; /* Image de fond */
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        /* Conteneur principal */
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Fond semi-transparent */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Champ input et bouton */
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Messages d'erreur ou de succès */
+        #error-message {
+            display: none;
+            color: red;
+            font-size: 16px;
+        }
+
+        /* Image cachée */
+        #hidden-image {
+            display: none;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Page protégée</h1>
+        <p>Veuillez entrer le code pour afficher l'image cachée :</p>
+        <input type="password" id="code" placeholder="Entrez le code">
+        <button onclick="checkCode()">Valider</button>
+        <p id="error-message">Code incorrect, essayez encore !</p>
+        <img id="hidden-image" src="Confirmation.jpg" alt="Image cachée">
+    </div>
+
+    <script>
+        function checkCode() {
+            const enteredCode = document.getElementById('code').value;
+            const correctCode = "341231422314"; // Définir ici le code correct
+
+            if (enteredCode === correctCode) {
+                document.getElementById('error-message').style.display = 'none';
+                document.getElementById('hidden-image').style.display = 'block';
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('hidden-image').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
