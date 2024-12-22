@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('imagemontenvers.jpg');no-repeat center center fixed; /* Image de fond */
+            background: url('imagemontenvers.jpg') no-repeat center center fixed; /* Image de fond */
             background-size: cover;
             font-family: Arial, sans-serif;
             color: white;
@@ -26,6 +26,8 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px; /* Limite la largeur du conteneur */
         }
 
         /* Champ input et bouton */
@@ -47,6 +49,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
+            max-width: 300px;
         }
 
         button:hover {
@@ -60,12 +64,28 @@
             font-size: 16px;
         }
 
-        /* Image cachée */
+        /* Image cachée (qui doit s'afficher en plein écran) */
         #hidden-image {
             display: none;
-            margin-top: 20px;
+            position: fixed;  /* Utilise la position fixe pour qu'elle couvre tout l'écran */
+            top: 0;
+            left: 0;
+            width: 100%; /* Remplir la largeur de l'écran */
+            height: 100vh; /* Remplir la hauteur de l'écran */
+            object-fit: cover; /* Assurer que l'image garde son ratio sans être déformée */
+            z-index: 9999; /* Assurer que l'image est au-dessus de tout */
         }
 
+        /* Pour les petits écrans (exemple : mobile) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px; /* Réduit l'espace autour du conteneur */
+            }
+
+            button, input[type="password"] {
+                padding: 12px; /* Augmente la taille des boutons et champs */
+            }
+        }
     </style>
 </head>
 <body>
@@ -75,7 +95,7 @@
         <input type="password" id="code" placeholder="Entrez le code">
         <button onclick="checkCode()">Valider</button>
         <p id="error-message">Code incorrect, essayez encore !</p>
-        <img id="hidden-image" src="confirmation.jpg">
+        <img id="hidden-image" src="confirmation.jpg" alt="Image cachée">
     </div>
 
     <script>
@@ -85,10 +105,10 @@
 
             if (enteredCode === correctCode) {
                 document.getElementById('error-message').style.display = 'none';
-                document.getElementById('hidden-image').style.display = 'block';
+                document.getElementById('hidden-image').style.display = 'block'; // Afficher l'image cachée
             } else {
                 document.getElementById('error-message').style.display = 'block';
-                document.getElementById('hidden-image').style.display = 'none';
+                document.getElementById('hidden-image').style.display = 'none'; // Cacher l'image
             }
         }
     </script>
